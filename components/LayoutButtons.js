@@ -58,15 +58,15 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderColor: 'lightgray',
     borderWidth: 1,
-    width: '30%',
+    width: '35%',
     height: 48,
     flexDirection: 'row',
-    marginHorizontal: 10,
   },
   button: {
     width: '50%',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   buttonLeft: {
     borderTopLeftRadius: 8,
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 8,
   },
   buttonNotSelected: {
-    backgroundColor: '#F0F1F3',
+    backgroundColor: '#F5F6F7',
     tintColor: 'gray',
   },
   headerSubtitle: {

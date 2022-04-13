@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-} from 'react-native';
-
-import { collaborators, link } from '../static/images';
-
+import {StyleSheet, Text, View} from 'react-native';
 
 const CardSmall = () => {
   return (

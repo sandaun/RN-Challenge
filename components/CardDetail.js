@@ -1,17 +1,7 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-  Image,
-} from 'react-native';
+import {StyleSheet, Text, View, Image} from 'react-native';
 
-import { collaborators, link } from '../static/images';
-
+import {collaborators, link} from '../static/images';
 
 const CardDetail = () => {
   const arrayWithNames = ['React', 'React Native', 'JavaScript'];
@@ -28,7 +18,7 @@ const CardDetail = () => {
             <Text style={styles.cardContentText}>Contributors</Text>
           </View>
           <View style={styles.cardContentList}>
-            {arrayWithNames?.map((name) => (
+            {arrayWithNames?.map(name => (
               <Text key={name} style={styles.cardList}>
                 {name}
               </Text>
@@ -41,7 +31,7 @@ const CardDetail = () => {
             <Text style={styles.cardContentText}>Attachments.</Text>
           </View>
           <View style={styles.cardContentList}>
-            {arrayWithNames?.map((name) => (
+            {arrayWithNames?.map(name => (
               <Text key={name} style={styles.cardList}>
                 {name}
               </Text>

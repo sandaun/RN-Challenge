@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
     width: '35%',
     height: 48,
     flexDirection: 'row',
-    // marginHorizontal: 10,
   },
   main: {
     borderRadius: 8,

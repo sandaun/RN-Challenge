@@ -1,16 +1,14 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import Button from './Button';
 
-const Footer = (props) => {
-  console.log(2, props.modal);
-  const onPressButton = () => {
-    props.modal?.open();
+const Footer = ({modalRef}) => {
+  const onButtonPress = () => {
+    modalRef.current?.open();
   };
 
   return (
-    <TouchableOpacity style={styles.button} onPress={onPressButton}>
-      <Text style={styles.buttonText}>+ Add document</Text>
-    </TouchableOpacity>
+    <Button onPress={onButtonPress} title={'+ Add document'}/>
   );
 };
 

@@ -1,111 +1,70 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import React from 'react';
-import type {Node} from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
-  Text,
-  useColorScheme,
   View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import CardDetail from './components/CardDetail';
+import CardSmall from './components/CardSmall';
+import LayoutButtons from './components/LayoutButtons';
+import DropDown from './components/Dropdown';
+import Header from './components/Header';
+import BottomModal from './components/BottomModal';
+import Footer from './components/Footer';
 
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
+const App = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  console.log(111, modalVisible);
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
-
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+    <>
+      <SafeAreaView style={styles.safeAreaTop} />
+      <StatusBar barStyle={'dark-content'} />
+      <Header />
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.controlsContainer}>
+          <DropDown />
+          <LayoutButtons />
         </View>
-      </ScrollView>
-    </SafeAreaView>
+        <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+          <CardDetail />
+          <CardSmall />
+        </ScrollView>
+        <BottomModal setModal={setModalVisible} />
+        <View style={styles.controlsContainer}>
+          <Footer modal={modalVisible} />
+        </View>
+      </SafeAreaView>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  safeAreaTop: {
+    flex: 0,
+    backgroundColor: 'white',
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  safeArea: {
+    backgroundColor: '#F5F6F7',
+    flexGrow: 1,
+    marginTop: 10,
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  controlsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 10,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    backgroundColor: '#F5F6F7',
+    zIndex: 1,
   },
-  highlight: {
-    fontWeight: '700',
+  scrollViewContainer: {
+    paddingTop: 30,
+    backgroundColor: '#F5F6F7',
+    flexGrow: 1,
   },
 });
 

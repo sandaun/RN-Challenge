@@ -1,25 +1,66 @@
-import React, {useRef, useEffect} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import React, {useRef, useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
 import {Modalize} from 'react-native-modalize';
 
-export const BottomModal = props => {
-  const modalizeRef = useRef(null);
+import Button from './Button';
+import Input from './Input';
 
-  useEffect(() => {
-    props.setModal(modalizeRef.current);
-  }, []);
+export const BottomModal = ({forwardedRef}) => {
+  const [name, setName] = useState('');
+  const [version, setVersion] = useState('');
 
   return (
-    <>
-      {/* <TouchableOpacity onPress={onOpen}>
-        <Text>Open the modal</Text>
-      </TouchableOpacity> */}
+    <Modalize ref={forwardedRef} overlayStyle={{opacity: 1}} modalHeight={300}>
+      <View style={styles.inputsContainer}>
+        <Input
+          placeholder={'Enter name'}
+          value={name}
+          onChangeText={setName}
+          title={'Name'}
+        />
+        <Input
+          placeholder={'Version'}
+          value={version}
+          onChangeText={setVersion}
+          title={'Version'}
+        />
+      </View>
 
-      <Modalize ref={modalizeRef} overlayStyle={{backgroundColor: 'gray', height: 100}}>
-        <Text>ljkklj</Text>
-      </Modalize>
-    </>
+      <View style={styles.buttonContainer}>
+        <Button title={'Close'} onPress={() => forwardedRef.current?.close()} />
+      </View>
+    </Modalize>
   );
 };
+
+const styles = StyleSheet.create({
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 10,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    zIndex: 1,
+  },
+  inputsContainer: {
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingTop: 20,
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    borderColor: 'red',
+  },
+});
 
 export default BottomModal;

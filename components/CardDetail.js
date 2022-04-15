@@ -3,13 +3,13 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 
 import {collaborators, link} from '../static/images';
 
-const CardDetail = () => {
+const CardDetail = ({document}) => {
   const arrayWithNames = ['React', 'React Native', 'JavaScript'];
   return (
     <View style={styles.card}>
       <View style={styles.cardHeader}>
-        <Text style={styles.headerTitle}>Hop Rod Rye</Text>
-        <Text style={styles.headerSubtitle}>Version 2.6.16</Text>
+        <Text style={styles.headerTitle}>{document.Title}</Text>
+        <Text style={styles.headerSubtitle}>Version {document.Version}</Text>
       </View>
       <View style={styles.cardContentWrapper}>
         <View style={styles.cardContentColumn}>
@@ -18,9 +18,9 @@ const CardDetail = () => {
             <Text style={styles.cardContentText}>Contributors</Text>
           </View>
           <View style={styles.cardContentList}>
-            {arrayWithNames?.map(name => (
-              <Text key={name} style={styles.cardList}>
-                {name}
+            {document.Contributors?.map(contributor => (
+              <Text key={contributor?.ID} style={styles.cardList}>
+                {contributor?.Name}
               </Text>
             ))}
           </View>
@@ -28,12 +28,12 @@ const CardDetail = () => {
         <View>
           <View style={styles.cardContentHeader}>
             <Image source={link} style={styles.cardContentIcon} />
-            <Text style={styles.cardContentText}>Attachments.</Text>
+            <Text style={styles.cardContentText}>Attachments</Text>
           </View>
           <View style={styles.cardContentList}>
-            {arrayWithNames?.map(name => (
-              <Text key={name} style={styles.cardList}>
-                {name}
+            {document.Attachments?.map(attachment => (
+              <Text key={attachment} style={styles.cardList}>
+                {attachment}
               </Text>
             ))}
           </View>
@@ -63,12 +63,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerTitle: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: 'bold',
     marginRight: 10,
+    width: '70%',
   },
   headerSubtitle: {
-    fontSize: 14,
+    fontSize: 12,
     color: 'gray',
   },
   cardContentWrapper: {
@@ -96,7 +97,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   cardList: {
-    fontSize: 16,
+    fontSize: 10,
     color: 'gray',
     marginBottom: 4,
   },

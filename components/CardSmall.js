@@ -1,22 +1,22 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-const CardSmall = () => {
+const CardSmall = ({document}) => {
   return (
     <View style={styles.card}>
-      <Text style={styles.headerTitle}>Hop Rod Rye</Text>
-      <Text style={styles.headerSubtitle}>Version 2.6.16</Text>
+      <Text style={styles.headerTitle}>{document.Title}</Text>
+      <Text style={styles.headerSubtitle}>{`Version ${document.Version}`}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
-    width: '50%',
+    width: '42%',
     backgroundColor: 'white',
     padding: 20,
     marginVertical: 10,
-    marginHorizontal: 20,
+    marginLeft: 20,
     borderRadius: 8,
     shadowColor: '#000',
     shadowOffset: {
@@ -26,12 +26,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
   },
   headerTitle: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 10,
   },
   headerSubtitle: {
-    fontSize: 14,
+    fontSize: 12,
     color: 'gray',
   },
 });

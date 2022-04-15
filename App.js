@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -14,10 +14,29 @@ import DropDown from './components/Dropdown';
 import Header from './components/Header';
 import BottomModal from './components/BottomModal';
 import Footer from './components/Footer';
+import documentsApi from './services/documentsApi';
 
 const App = () => {
-  const [modalVisible, setModalVisible] = useState(false);
-  console.log(111, modalVisible);
+  const modalRef = useRef(null);
+  const [documents, setDocuments] = useState([]);
+  const [activeLayout, setActiveLayout] = useState('list');
+
+  useEffect(() => {
+    handleApiData();
+  }, []);
+
+  const handleApiData = async () => {
+    const api = documentsApi();
+
+    try {
+      const data = await api.getInfo();
+
+      setDocuments(data);
+    } catch (error) {
+      console.warn(error);
+    }
+  };
+
   return (
     <>
       <SafeAreaView style={styles.safeAreaTop} />
@@ -26,16 +45,25 @@ const App = () => {
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.controlsContainer}>
           <DropDown />
-          <LayoutButtons />
+          <LayoutButtons handleLayout={setActiveLayout} />
         </View>
-        <ScrollView contentContainerStyle={styles.scrollViewContainer}>
-          <CardDetail />
-          <CardSmall />
-        </ScrollView>
-        <BottomModal setModal={setModalVisible} />
-        <View style={styles.controlsContainer}>
-          <Footer modal={modalVisible} />
+        <View style={styles.scrollFooterWrapper}>
+          <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+            <View style={activeLayout === 'grid' ? styles.columns : null}>
+              {documents.map((document, index) =>
+                activeLayout === 'list' ? (
+                  <CardDetail document={document} key={document?.ID} />
+                ) : (
+                  <CardSmall document={document} key={document?.ID} />
+                ),
+              )}
+            </View>
+          </ScrollView>
+          <View style={styles.controlsContainer}>
+            <Footer modalRef={modalRef} />
+          </View>
         </View>
+        <BottomModal forwardedRef={modalRef} />
       </SafeAreaView>
     </>
   );
@@ -45,6 +73,11 @@ const styles = StyleSheet.create({
   safeAreaTop: {
     flex: 0,
     backgroundColor: 'white',
+  },
+  columns: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   safeArea: {
     backgroundColor: '#F5F6F7',
@@ -65,6 +98,9 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     backgroundColor: '#F5F6F7',
     flexGrow: 1,
+  },
+  scrollFooterWrapper: {
+    flex: 1,
   },
 });
 

@@ -1,10 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Image, TouchableOpacity} from 'react-native';
 
 import {list, grid} from '../static/images';
 
-const LayoutButtons = () => {
+const LayoutButtons = ({handleLayout}) => {
   const [layout, setLayout] = useState('list');
+
+  useEffect(() => {
+    handleLayout(layout);
+  }, [layout]);
 
   const GRID = 'grid';
   const LIST = 'list';

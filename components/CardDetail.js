@@ -31,8 +31,8 @@ const CardDetail = ({document}) => {
             <Text style={styles.cardContentText}>Attachments</Text>
           </View>
           <View style={styles.cardContentList}>
-            {document.Attachments?.map(attachment => (
-              <Text key={attachment} style={styles.cardList}>
+            {document.Attachments?.map((attachment, index) => (
+              <Text key={index} style={styles.cardList}>
                 {attachment}
               </Text>
             ))}

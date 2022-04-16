@@ -4,7 +4,6 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 import {collaborators, link} from '../static/images';
 
 const CardDetail = ({document}) => {
-  const arrayWithNames = ['React', 'React Native', 'JavaScript'];
   return (
     <View style={styles.card}>
       <View style={styles.cardHeader}>

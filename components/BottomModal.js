@@ -10,13 +10,14 @@ import {Modalize} from 'react-native-modalize';
 
 import Button from './Button';
 import Input from './Input';
+import AttachButton from './AttachButton';
 
 export const BottomModal = ({forwardedRef}) => {
   const [name, setName] = useState('');
   const [version, setVersion] = useState('');
 
   return (
-    <Modalize ref={forwardedRef} overlayStyle={{opacity: 1}} modalHeight={300}>
+    <Modalize ref={forwardedRef} overlayStyle={{opacity: 1}} modalHeight={380}>
       <View style={styles.inputsContainer}>
         <Input
           placeholder={'Enter name'}
@@ -30,6 +31,7 @@ export const BottomModal = ({forwardedRef}) => {
           onChangeText={setVersion}
           title={'Version'}
         />
+        <AttachButton />
       </View>
 
       <View style={styles.buttonContainer}>
@@ -53,13 +55,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     paddingTop: 20,
-  },
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    borderColor: 'red',
   },
 });
 

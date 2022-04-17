@@ -91,7 +91,7 @@ const Main = () => {
       </SafeAreaView>
     </>
   );
-};;;;;;;;;;;;;;;;;;;;;
+};
 
 const styles = StyleSheet.create({
   safeAreaTop: {

@@ -23,7 +23,6 @@ const Main = () => {
   const modalRef = useRef(null);
   const [documents, setDocuments] = useState([]);
   const [activeLayout, setActiveLayout] = useState('list');
-  const [notifications, setNotifications] = useState([]);
 
   const context = useContext(ChallengeContext);
 
@@ -43,7 +42,11 @@ const Main = () => {
   };
 
   const addNotification = notification => {
-    context.setContextData(prevContext => [...prevContext, notification]);
+    context.setContextData(prevContext => {
+      return {
+        notifications: [...prevContext?.notifications, notification],
+      };
+    });
   };
 
   const handleApiData = async () => {
@@ -59,7 +62,7 @@ const Main = () => {
   };
 
   return (
-    <ChallengeProvider>
+    <>
       <SafeAreaView style={styles.safeAreaTop} />
       <StatusBar barStyle={'dark-content'} />
       <Header />
@@ -86,9 +89,9 @@ const Main = () => {
         </View>
         <BottomModal forwardedRef={modalRef} />
       </SafeAreaView>
-    </ChallengeProvider>
+    </>
   );
-};
+};;;;;;;;;;;;;;;;;;;;;
 
 const styles = StyleSheet.create({
   safeAreaTop: {

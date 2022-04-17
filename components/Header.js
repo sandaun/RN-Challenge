@@ -1,20 +1,50 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect, useMemo} from 'react';
 import {StyleSheet, View, Image, TouchableOpacity, Text} from 'react-native';
 
 import {bell} from '../static/images';
+import {ChallengeContext} from '../context/ChallengeProvider';
 
 const Header = () => {
+  const [isNotificationShown, setIsNotificationShown] = useState(false);
+  const context = useContext(ChallengeContext);
+
+  const numberOfNotifications = useMemo(
+    () =>
+      context.contextData?.notifications.length > 9
+        ? '9+'
+        : context.contextData?.notifications.length,
+    [context.contextData?.notifications],
+  );
+
+  useEffect(() => {
+    if (numberOfNotifications > 0) {
+      setIsNotificationShown(true);
+    }
+  }, [numberOfNotifications]);
+
+  const clearNotifications = () => {
+    context.setContextData(prevContext => {
+      return {
+        notifications: [],
+      };
+    });
+    setIsNotificationShown(false);
+  };
   return (
     <View style={styles.headerContainer}>
       <View>
         <Text style={styles.title}>Documents</Text>
       </View>
-      <View style={styles.iconContainer}>
-        <View style={styles.notification}>
-          <Text style={styles.notificationText}>1</Text>
-        </View>
+      <TouchableOpacity
+        style={styles.iconContainer}
+        onPress={clearNotifications}>
+        {isNotificationShown && (
+          <View style={styles.notification}>
+            <Text style={styles.notificationText}>{numberOfNotifications}</Text>
+          </View>
+        )}
         <Image source={bell} style={styles.layoutIcon} />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -53,9 +83,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 15,
-    height: 15,
-    borderRadius: 7.5,
+    width: 16,
+    height: 16,
+    borderRadius: 8,
     backgroundColor: '#5781E4',
     zIndex: 1,
     top: 4,

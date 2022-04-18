@@ -1,14 +1,17 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useContext} from 'react';
 import {StyleSheet, View, Image, TouchableOpacity, Text} from 'react-native';
 
 import {document} from '../static/images';
+import {ChallengeContext} from '../context/ChallengeProvider';
 
-const AttachButton = () => {
+const AttachButton = ({fileModalRef}) => {
   const [layout, setLayout] = useState('list');
+  const context = useContext(ChallengeContext);
 
   const handleAttachList = () => {
-    console.log('attach');
+    fileModalRef.current.open();
   };
+
   return (
     <>
       <Text style={styles.title}>File</Text>

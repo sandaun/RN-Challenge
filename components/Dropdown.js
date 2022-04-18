@@ -36,8 +36,6 @@ const DropDown = () => {
     });
   };
 
-  console.log(123, value);
-
   return (
     <DropDownPicker
       open={open}

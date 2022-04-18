@@ -59,8 +59,6 @@ export const BottomModal = ({forwardedRef}) => {
     [name, version, context.contextData.Attachments],
   );
 
-  console.log(1, isButtonDisabled, context.contextData);
-
   return (
     <Modalize ref={forwardedRef} overlayStyle={{opacity: 1}} modalHeight={380}>
       <View style={styles.inputsContainer}>

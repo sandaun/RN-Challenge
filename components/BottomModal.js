@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useState} from 'react';
+import React, {useRef, useEffect, useState, useContext} from 'react';
 import {
   View,
   Text,
@@ -11,10 +11,36 @@ import {Modalize} from 'react-native-modalize';
 import Button from './Button';
 import Input from './Input';
 import AttachButton from './AttachButton';
+import FileModal from './FileModal';
+import {ChallengeContext} from '../context/ChallengeProvider';
 
 export const BottomModal = ({forwardedRef}) => {
   const [name, setName] = useState('');
   const [version, setVersion] = useState('');
+
+  const context = useContext(ChallengeContext);
+
+  const fileModalRef = useRef(null);
+
+  const onSubmitButtonPress = () => {
+    context.setContextData(prevContext => {
+      return {
+        ...prevContext,
+        documents: [
+          ...prevContext.documents,
+          {
+            name,
+            version,
+            file: context.contextData.fileChosen,
+          },
+        ],
+        fileChosen: null,
+      };
+    });
+    forwardedRef.current?.close();
+    setName('');
+    setVersion('');
+  };
 
   return (
     <Modalize ref={forwardedRef} overlayStyle={{opacity: 1}} modalHeight={380}>
@@ -31,12 +57,13 @@ export const BottomModal = ({forwardedRef}) => {
           onChangeText={setVersion}
           title={'Version'}
         />
-        <AttachButton />
+        <AttachButton fileModalRef={fileModalRef} />
       </View>
 
       <View style={styles.buttonContainer}>
-        <Button title={'Close'} onPress={() => forwardedRef.current?.close()} />
+        <Button title={'Submit'} onPress={onSubmitButtonPress} />
       </View>
+      <FileModal fileModalRef={fileModalRef} />
     </Modalize>
   );
 };

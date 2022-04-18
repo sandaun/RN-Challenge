@@ -27,12 +27,13 @@ export const BottomModal = ({forwardedRef}) => {
       return {
         ...prevContext,
         documents: [
-          ...prevContext.documents,
           {
-            name,
-            version,
-            file: context.contextData.fileChosen,
+            Title: name,
+            Version: version,
+            Attachments: context.contextData.Attachments,
+            Contributors: context.contextData.Contributors,
           },
+          ...prevContext.documents,
         ],
         fileChosen: null,
       };

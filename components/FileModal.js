@@ -23,7 +23,8 @@ export const FileModal = ({fileModalRef}) => {
     context.setContextData(prevContext => {
       return {
         ...prevContext,
-        fileChosen: file,
+        Attachments: file.Attachments,
+        Contributors: file.Contributors,
       };
     });
   };
@@ -55,7 +56,6 @@ const styles = StyleSheet.create({
   },
   scrollViewContainer: {
     marginTop: 20,
-    // backgroundColor: '#F5F6F7',
     flexGrow: 1,
   },
   title: {

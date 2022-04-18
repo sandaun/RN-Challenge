@@ -44,6 +44,7 @@ const Main = () => {
   const addNotification = notification => {
     context.setContextData(prevContext => {
       return {
+        ...prevContext,
         notifications: [...prevContext?.notifications, notification],
       };
     });

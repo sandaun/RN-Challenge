@@ -1,30 +1,41 @@
 const fakeData = [
   {
     id: 1,
-    contributors: ['John Doe', 'Jenny Doe', 'Jill Doe'],
-    attachments: ['stout', 'wheat', 'porter'],
+    Contributors: [
+      {id: 1, Name: 'John Doe'},
+      {id: 2, Name: 'Jenny Doe'},
+      {id: 3, Name: 'Jill Doe'},
+    ],
+    Attachments: ['stout', 'wheat', 'porter'],
   },
   {
     id: 2,
-    contributors: [
-      'John Doe',
-      'Jenny Doe',
-      'Jill Doe',
-      'John Smith',
-      'Jenny Smith',
+
+    Contributors: [
+      {id: 1, Name: 'Duke Doe'},
+      {id: 2, Name: 'Kevin Smith'},
+      {id: 3, Name: 'Oriol Doe'},
+      {id: 3, Name: 'Billy Bean'},
     ],
-    attachments: ['belgian', 'saison', 'pale lager'],
+    Attachments: ['belgian', 'saison', 'pale lager'],
   },
   {
     id: 3,
-    contributors: ['Jenny Smith', 'Jill Smith'],
-    attachments: ['pale ale', 'pilsner', 'porter'],
+    Contributors: [
+      {id: 1, Name: 'Oriol Carbó'},
+      {id: 2, Name: 'Ori Calvet'},
+    ],
+    Attachments: ['pale ale', 'pilsner', 'porter'],
   },
   {
     id: 4,
-    contributors: ['Oriol Carbó', 'Jill Doe'],
-    attachments: ['stout', 'wheat', 'porter'],
+    Contributors: [
+      {id: 1, Name: 'Darcy Carbó'},
+      {id: 2, Name: 'Paty Calvet'},
+    ],
+    Attachments: ['stout', 'wheat', 'porter'],
   },
 ];
 
 export default fakeData;
+

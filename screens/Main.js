@@ -34,6 +34,12 @@ const Main = () => {
     handleSocket();
   }, []);
 
+  useEffect(() => {
+    if (context.contextData.documents.length > 0) {
+      setDocuments([context.contextData.documents?.[0], ...documents]);
+    }
+  }, [context.contextData.documents]);
+
   const handleSocket = () => {
     const socket = getSocket();
     socket.onmessage = ({data}) => {
@@ -61,6 +67,8 @@ const Main = () => {
       console.warn(error);
     }
   };
+
+  console.log(context.contextData);
 
   return (
     <>

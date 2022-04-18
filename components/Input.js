@@ -14,7 +14,7 @@ export const Input = ({value, onChangeText, placeholder, title}) => {
         style={styles.input}
         placeholder={placeholder}
         placeholderTextColor="#999"
-        autoCapitalize="none"
+        autoCapitalize="words"
         autoCorrect={false}
         onChangeText={onChangeText}
         value={value}

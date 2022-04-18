@@ -14,6 +14,7 @@ import Input from './Input';
 import AttachButton from './AttachButton';
 import fakeData from '../static/fakeData';
 import {ChallengeContext} from '../context/ChallengeProvider';
+import {CHOOSE_FILE, FILE_TYPE} from '../static/constants';
 
 export const FileModal = ({fileModalRef}) => {
   const context = useContext(ChallengeContext);
@@ -32,7 +33,7 @@ export const FileModal = ({fileModalRef}) => {
   return (
     <Modalize ref={fileModalRef} modalHeight={380}>
       <View style={styles.titleContainer}>
-        <Text style={styles.title}>Choose file</Text>
+        <Text style={styles.title}>{CHOOSE_FILE}</Text>
       </View>
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
         {fakeData.map((item, index) => (
@@ -40,7 +41,7 @@ export const FileModal = ({fileModalRef}) => {
             key={index}
             style={styles.itemContainer}
             onPress={() => onFilePress(item)}>
-            <Text style={styles.itemText}>File type {item.id}</Text>
+            <Text style={styles.itemText}>{`${FILE_TYPE} ${item.id}`}</Text>
           </TouchableOpacity>
         ))}
       </ScrollView>

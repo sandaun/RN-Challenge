@@ -4,6 +4,8 @@ import {StyleSheet, View, Image, TouchableOpacity, Text} from 'react-native';
 import {document} from '../static/images';
 import {ChallengeContext} from '../context/ChallengeProvider';
 
+import {CHOOSE_FILE, FILE} from '../static/constants';
+
 const AttachButton = ({fileModalRef}) => {
   const [layout, setLayout] = useState('list');
   const context = useContext(ChallengeContext);
@@ -14,12 +16,12 @@ const AttachButton = ({fileModalRef}) => {
 
   return (
     <>
-      <Text style={styles.title}>File</Text>
+      <Text style={styles.title}>{FILE}</Text>
       <TouchableOpacity
         style={styles.buttonsContainer}
         onPress={handleAttachList}>
         <Image source={document} style={styles.layoutIcon} />
-        <Text style={styles.buttonText}>Choose file</Text>
+        <Text style={styles.buttonText}>{CHOOSE_FILE}</Text>
       </TouchableOpacity>
     </>
   );

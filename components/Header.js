@@ -4,6 +4,8 @@ import {StyleSheet, View, Image, TouchableOpacity, Text} from 'react-native';
 import {bell} from '../static/images';
 import {ChallengeContext} from '../context/ChallengeProvider';
 
+import {DOCUMENTS} from '../static/constants';
+
 const Header = () => {
   const [isNotificationShown, setIsNotificationShown] = useState(false);
   const context = useContext(ChallengeContext);
@@ -33,7 +35,7 @@ const Header = () => {
   return (
     <View style={styles.headerContainer}>
       <View>
-        <Text style={styles.title}>Documents</Text>
+        <Text style={styles.title}>{DOCUMENTS}</Text>
       </View>
       <TouchableOpacity
         style={styles.iconContainer}

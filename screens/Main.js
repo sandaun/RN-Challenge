@@ -18,6 +18,14 @@ import documentsApi from '../services/documentsApi';
 import {getSocket} from '../websocket/websocket';
 import ChallengeProvider from '../context/ChallengeProvider';
 import {ChallengeContext} from '../context/ChallengeProvider';
+import {
+  GRID,
+  LIST,
+  VERSION,
+  TITLE,
+  VERSION_VALUE,
+  TITLE_VALUE,
+} from '../static/constants';
 
 const Main = () => {
   const modalRef = useRef(null);
@@ -35,10 +43,34 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    if (context.contextData.documents.length > 0) {
+    if (context.contextData.documents?.length > 0) {
       setDocuments([context.contextData.documents?.[0], ...documents]);
     }
   }, [context.contextData.documents]);
+
+  useEffect(() => {
+    if (documents.length > 0 && context.contextData.filterBy !== null) {
+      if (context.contextData.filterBy === TITLE_VALUE) {
+        orderDocuments(TITLE);
+      } else if (context.contextData.filterBy === VERSION_VALUE) {
+        orderDocuments(VERSION);
+      }
+    }
+  }, [documents, context.contextData.filterBy]);
+
+  const orderDocuments = orderBy => {
+    setDocuments(
+      documents.sort((a, b) => {
+        if (a[orderBy] < b[orderBy]) {
+          return -1;
+        }
+        if (a[orderBy] > b[orderBy]) {
+          return 1;
+        }
+        return 0;
+      }),
+    );
+  };
 
   const handleSocket = () => {
     const socket = getSocket();
@@ -68,8 +100,6 @@ const Main = () => {
     }
   };
 
-  console.log(context.contextData);
-
   return (
     <>
       <SafeAreaView style={styles.safeAreaTop} />
@@ -82,9 +112,9 @@ const Main = () => {
         </View>
         <View style={styles.scrollFooterWrapper}>
           <ScrollView contentContainerStyle={styles.scrollViewContainer}>
-            <View style={activeLayout === 'grid' ? styles.columns : null}>
+            <View style={activeLayout === GRID ? styles.columns : null}>
               {documents.map((document, index) =>
-                activeLayout === 'list' ? (
+                activeLayout === LIST ? (
                   <CardDetail document={document} key={document?.ID} />
                 ) : (
                   <CardSmall document={document} key={document?.ID} />

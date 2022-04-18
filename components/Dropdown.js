@@ -1,18 +1,42 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {StyleSheet} from 'react-native';
-
 import DropDownPicker from 'react-native-dropdown-picker';
+
+import {ChallengeContext} from '../context/ChallengeProvider';
+import {
+  PLACEHOLDER,
+  VERSION,
+  TITLE,
+  VERSION_VALUE,
+  TITLE_VALUE,
+} from '../static/constants';
 
 const DropDown = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([
-    {label: 'Apple', value: 'apple'},
-    {label: 'Orange', value: 'orange'},
-    ,
+    {label: TITLE, value: TITLE_VALUE},
+    {label: VERSION, value: VERSION_VALUE},
   ]);
 
-  const PLACEHOLDER = 'Sort by';
+  const context = useContext(ChallengeContext);
+
+  useEffect(() => {
+    if (value) {
+      addFilterValue(value);
+    }
+  }, [value]);
+
+  const addFilterValue = notification => {
+    context.setContextData(prevContext => {
+      return {
+        ...prevContext,
+        filterBy: value,
+      };
+    });
+  };
+
+  console.log(123, value);
 
   return (
     <DropDownPicker

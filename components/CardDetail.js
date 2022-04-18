@@ -2,19 +2,22 @@ import React from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 
 import {collaborators, link} from '../static/images';
+import {VERSION, CONTRIBUTORS, ATTACHMENTS} from '../static/constants';
 
 const CardDetail = ({document}) => {
   return (
     <View style={styles.card}>
       <View style={styles.cardHeader}>
         <Text style={styles.headerTitle}>{document.Title}</Text>
-        <Text style={styles.headerSubtitle}>Version {document.Version}</Text>
+        <Text style={styles.headerSubtitle}>
+          {`${VERSION} ${document.Version}`}
+        </Text>
       </View>
       <View style={styles.cardContentWrapper}>
         <View style={styles.cardContentColumn}>
           <View style={styles.cardContentHeader}>
             <Image source={collaborators} style={styles.cardContentIcon} />
-            <Text style={styles.cardContentText}>Contributors</Text>
+            <Text style={styles.cardContentText}>{CONTRIBUTORS}</Text>
           </View>
           <View style={styles.cardContentList}>
             {document.Contributors?.map(contributor => (
@@ -27,7 +30,7 @@ const CardDetail = ({document}) => {
         <View>
           <View style={styles.cardContentHeader}>
             <Image source={link} style={styles.cardContentIcon} />
-            <Text style={styles.cardContentText}>Attachments</Text>
+            <Text style={styles.cardContentText}>{ATTACHMENTS}</Text>
           </View>
           <View style={styles.cardContentList}>
             {document.Attachments?.map((attachment, index) => (

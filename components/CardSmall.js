@@ -1,11 +1,14 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
+import {VERSION} from '../static/constants';
+
 const CardSmall = ({document}) => {
   return (
     <View style={styles.card}>
       <Text style={styles.headerTitle}>{document.Title}</Text>
-      <Text style={styles.headerSubtitle}>{`Version ${document.Version}`}</Text>
+      <Text
+        style={styles.headerSubtitle}>{`${VERSION} ${document.Version}`}</Text>
     </View>
   );
 };

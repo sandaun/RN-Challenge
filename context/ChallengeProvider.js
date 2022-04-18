@@ -9,8 +9,6 @@ const ChallengeProvider = props => {
       notifications: [],
       documents: [],
       fileChosen: null,
-      Contributors: [],
-      Attachments: [],
     };
   });
 

@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useState, useContext} from 'react';
+import React, {useRef, useEffect, useState, useContext, useMemo} from 'react';
 import {
   View,
   Text,
@@ -13,6 +13,14 @@ import Input from './Input';
 import AttachButton from './AttachButton';
 import FileModal from './FileModal';
 import {ChallengeContext} from '../context/ChallengeProvider';
+
+import {
+  ENTER_NAME,
+  NAME,
+  VERSION,
+  SUBMIT,
+  VERSION_NUMBER,
+} from '../static/constants';
 
 export const BottomModal = ({forwardedRef}) => {
   const [name, setName] = useState('');
@@ -43,26 +51,40 @@ export const BottomModal = ({forwardedRef}) => {
     setVersion('');
   };
 
+  const isButtonDisabled = useMemo(
+    () =>
+      name && version && context.contextData.Attachments?.length > 0
+        ? false
+        : true,
+    [name, version, context.contextData.Attachments],
+  );
+
+  console.log(1, isButtonDisabled, context.contextData);
+
   return (
     <Modalize ref={forwardedRef} overlayStyle={{opacity: 1}} modalHeight={380}>
       <View style={styles.inputsContainer}>
         <Input
-          placeholder={'Enter name'}
+          placeholder={ENTER_NAME}
           value={name}
           onChangeText={setName}
-          title={'Name'}
+          title={NAME}
         />
         <Input
-          placeholder={'Version'}
+          placeholder={VERSION_NUMBER}
           value={version}
           onChangeText={setVersion}
-          title={'Version'}
+          title={VERSION}
         />
         <AttachButton fileModalRef={fileModalRef} />
       </View>
 
       <View style={styles.buttonContainer}>
-        <Button title={'Submit'} onPress={onSubmitButtonPress} />
+        <Button
+          title={SUBMIT}
+          onPress={onSubmitButtonPress}
+          disabled={isButtonDisabled}
+        />
       </View>
       <FileModal fileModalRef={fileModalRef} />
     </Modalize>

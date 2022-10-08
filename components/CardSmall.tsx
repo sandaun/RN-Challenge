@@ -1,9 +1,14 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
-import {VERSION} from '../static/constants';
+import { VERSION } from '../static/constants';
+import { Doc } from '../ts/interfaces';
 
-const CardSmall = ({document}) => {
+export type Props = {
+  document: Doc;
+};
+
+const CardSmall: React.FC<Props> = ({ document }) => {
   return (
     <View style={styles.card}>
       <Text style={styles.headerTitle}>{document.Title}</Text>

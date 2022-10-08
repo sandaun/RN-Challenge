@@ -3,8 +3,13 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 
 import {collaborators, link} from '../static/images';
 import {VERSION, CONTRIBUTORS, ATTACHMENTS} from '../static/constants';
+import { Doc } from '../ts/interfaces';
 
-const CardDetail = ({document}) => {
+export type Props = {
+  document: Doc;
+};
+
+const CardDetail: React.FC<Props> = ({document}) => {
   return (
     <View style={styles.card}>
       <View style={styles.cardHeader}>

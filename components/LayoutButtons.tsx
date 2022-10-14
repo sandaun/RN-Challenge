@@ -4,7 +4,11 @@ import {StyleSheet, View, Image, TouchableOpacity} from 'react-native';
 import {list, grid} from '../static/images';
 import {LIST, GRID} from '../static/constants';
 
-const LayoutButtons = ({handleLayout}) => {
+type Props = {
+  handleLayout: (vale: string) => void;
+};
+
+const LayoutButtons: React.FC<Props> = ({handleLayout}) => {
   const [layout, setLayout] = useState(LIST);
 
   useEffect(() => {

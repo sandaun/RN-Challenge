@@ -1,9 +1,6 @@
-import React, {useRef, useEffect, useState, useContext, useMemo} from 'react';
+import React, {useRef, useState, useContext, useMemo} from 'react';
 import {
   View,
-  Text,
-  TextInput,
-  TouchableOpacity,
   StyleSheet,
 } from 'react-native';
 import {Modalize} from 'react-native-modalize';

@@ -2,26 +2,27 @@ import React, {useContext} from 'react';
 import {
   View,
   Text,
-  TextInput,
   TouchableOpacity,
   StyleSheet,
   ScrollView,
 } from 'react-native';
 import {Modalize} from 'react-native-modalize';
 
-import Button from './Button';
-import Input from './Input';
-import AttachButton from './AttachButton';
 import fakeData from '../static/fakeData';
 import {ChallengeContext} from '../context/ChallengeProvider';
 import {CHOOSE_FILE, FILE_TYPE} from '../static/constants';
+import { BottomModalRef, File } from '../ts/interfaces';
 
-export const FileModal = ({fileModalRef}) => {
+type Props = {
+  fileModalRef: React.RefObject<BottomModalRef>;
+};
+export const FileModal: React.FC<Props> = ({fileModalRef}) => {
   const context = useContext(ChallengeContext);
 
-  const onFilePress = file => {
-    fileModalRef.current.close();
-    context.setContextData(prevContext => {
+  const onFilePress = (file: File) => {
+    console.log(file)
+    fileModalRef.current?.close();
+    context.setContextData && context.setContextData(prevContext => {
       return {
         ...prevContext,
         Attachments: file.Attachments,
@@ -41,7 +42,7 @@ export const FileModal = ({fileModalRef}) => {
             key={index}
             style={styles.itemContainer}
             onPress={() => onFilePress(item)}>
-            <Text style={styles.itemText}>{`${FILE_TYPE} ${item.id}`}</Text>
+            <Text style={styles.itemText}>{`${FILE_TYPE} ${item.ID}`}</Text>
           </TouchableOpacity>
         ))}
       </ScrollView>

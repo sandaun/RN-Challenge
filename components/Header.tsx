@@ -12,7 +12,7 @@ const Header: React.FC = () => {
 
   const numberOfNotifications = useMemo(
     () =>
-    context.contextData?.Notifications?.length && context.contextData?.Notifications?.length > 9
+    context.contextData && context.contextData?.Notifications?.length > 9
         ? '9+'
         : context.contextData?.Notifications.length,
     [context.contextData?.Notifications],

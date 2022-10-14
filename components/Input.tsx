@@ -3,13 +3,12 @@ import {Text, TextInput, StyleSheet} from 'react-native';
 
 type Props = {
   value: string;
-  onChangeText: () => void;
+  onChangeText: (value: (string)) => void;
   placeholder: string;
   title: string;
 };
 
 export const Input: React.FC<Props> = ({value, onChangeText, placeholder, title}) => {
-  const [text, setText] = useState('');
 
   return (
     <>

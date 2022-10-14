@@ -6,28 +6,29 @@ import {ChallengeContext} from '../context/ChallengeProvider';
 
 import {DOCUMENTS} from '../static/constants';
 
-const Header = () => {
+const Header: React.FC = () => {
   const [isNotificationShown, setIsNotificationShown] = useState(false);
   const context = useContext(ChallengeContext);
 
   const numberOfNotifications = useMemo(
     () =>
-      context.contextData?.notifications.length > 9
+    context.contextData?.Notifications?.length && context.contextData?.Notifications?.length > 9
         ? '9+'
-        : context.contextData?.notifications.length,
-    [context.contextData?.notifications],
+        : context.contextData?.Notifications.length,
+    [context.contextData?.Notifications],
   );
 
   useEffect(() => {
-    if (numberOfNotifications > 0) {
+    if (numberOfNotifications && numberOfNotifications > 0) {
       setIsNotificationShown(true);
     }
   }, [numberOfNotifications]);
 
   const clearNotifications = () => {
-    context.setContextData(prevContext => {
+    context.setContextData?.(prevContext => {
       return {
-        notifications: [],
+        ...prevContext,
+        Notifications: [],
       };
     });
     setIsNotificationShown(false);

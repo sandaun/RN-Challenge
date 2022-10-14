@@ -4,13 +4,18 @@ import Button from './Button';
 
 import {ADD_DOCUMENT} from '../static/constants';
 import {ChallengeContext} from '../context/ChallengeProvider';
+import { BottomModalRef } from '../ts/interfaces';
 
-const Footer = ({modalRef}) => {
+type Props = {
+  modalRef: React.RefObject<BottomModalRef>;
+};
+
+const Footer: React.FC<Props> = ({modalRef}) => {
   const context = useContext(ChallengeContext);
 
   const onButtonPress = () => {
     modalRef.current?.open();
-    context.setContextData(prevContext => {
+    context.setContextData?.(prevContext => {
       return {
         ...prevContext,
         Attachments: [],

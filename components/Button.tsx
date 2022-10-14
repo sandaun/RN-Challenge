@@ -1,7 +1,13 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
-const Button = ({onPress, title, disabled}) => {
+export type Props = {
+  onPress: () => void;
+  title: string;
+  disabled: boolean;
+};
+
+const Button: React.FC<Props> = ({onPress, title, disabled}) => {
   return (
     <TouchableOpacity
       style={[styles.button, disabled && styles.disabledButton]}

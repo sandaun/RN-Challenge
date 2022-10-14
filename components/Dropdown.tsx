@@ -23,12 +23,12 @@ const DropDown = () => {
 
   useEffect(() => {
     if (value) {
-      addFilterValue(value);
+      addFilterValue();
     }
   }, [value]);
 
-  const addFilterValue = notification => {
-    context.setContextData(prevContext => {
+  const addFilterValue = () => {
+    context.setContextData && context.setContextData(prevContext => {
       return {
         ...prevContext,
         filterBy: value,

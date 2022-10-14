@@ -2,25 +2,25 @@ import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Image, TouchableOpacity} from 'react-native';
 
 import {list, grid} from '../static/images';
-import {LIST, GRID} from '../static/constants';
+import {UIDesign} from '../ts/enums';
 
 type Props = {
   handleLayout: (vale: string) => void;
 };
 
 const LayoutButtons: React.FC<Props> = ({handleLayout}) => {
-  const [layout, setLayout] = useState(LIST);
+  const [layout, setLayout] = useState(UIDesign.LIST);
 
   useEffect(() => {
     handleLayout(layout);
   }, [layout]);
 
   const handleLayoutList = () => {
-    setLayout(LIST);
+    setLayout(UIDesign.LIST);
   };
 
   const handleLayoutGrid = () => {
-    setLayout(GRID);
+    setLayout(UIDesign.GRID);
   };
 
   return (
@@ -29,14 +29,14 @@ const LayoutButtons: React.FC<Props> = ({handleLayout}) => {
         style={[
           styles.button,
           styles.buttonLeft,
-          layout !== LIST ? styles.buttonNotSelected : null,
+          layout !== UIDesign.LIST ? styles.buttonNotSelected : null,
         ]}
         onPress={handleLayoutList}>
         <Image
           source={list}
           style={[
             styles.layoutIcon,
-            layout !== LIST ? styles.iconNotSelected : null,
+            layout !== UIDesign.LIST ? styles.iconNotSelected : null,
           ]}
         />
       </TouchableOpacity>
@@ -44,14 +44,14 @@ const LayoutButtons: React.FC<Props> = ({handleLayout}) => {
         style={[
           styles.button,
           styles.buttonRight,
-          layout !== GRID ? styles.buttonNotSelected : null,
+          layout !== UIDesign.GRID ? styles.buttonNotSelected : null,
         ]}
         onPress={handleLayoutGrid}>
         <Image
           source={grid}
           style={[
             styles.layoutIcon,
-            layout !== GRID ? styles.iconNotSelected : null,
+            layout !== UIDesign.GRID ? styles.iconNotSelected : null,
           ]}
         />
       </TouchableOpacity>

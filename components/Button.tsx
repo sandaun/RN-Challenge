@@ -1,10 +1,10 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
-export type Props = {
+type Props = {
   onPress: () => void;
   title: string;
-  disabled: boolean;
+  disabled?: boolean;
 };
 
 const Button: React.FC<Props> = ({onPress, title, disabled}) => {
@@ -12,7 +12,8 @@ const Button: React.FC<Props> = ({onPress, title, disabled}) => {
     <TouchableOpacity
       style={[styles.button, disabled && styles.disabledButton]}
       onPress={onPress}
-      disabled={disabled}>
+      disabled={disabled}
+    >
       <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity>
   );

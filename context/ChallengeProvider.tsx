@@ -8,10 +8,8 @@ export type Props = {
 };
 
 const ChallengeProvider: React.FC<Props> = props => {
-  // const [contextData, setContextData] = useState<ContextData>((prevContext: ContextData): ContextData => {
     const [contextData, setContextData] = useState<ContextData>((): ContextData => {
     return {
-      // ...prevContext,
       Notifications: [],
       Documents: [],
       Attachments: [],

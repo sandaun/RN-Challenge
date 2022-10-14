@@ -21,6 +21,9 @@ export interface BottomModalRef {
 export interface Notification {
   Timestamp: string;
   DocumentTitle: string;
+  DocumentID: string;
+  UserName: string;
+  UserID: string;
 }
 
 export interface File {

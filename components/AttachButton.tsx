@@ -1,8 +1,7 @@
-import React, {useState, useContext} from 'react';
-import {StyleSheet, View, Image, TouchableOpacity, Text} from 'react-native';
+import React from 'react';
+import {StyleSheet, Image, TouchableOpacity, Text} from 'react-native';
 
 import {document} from '../static/images';
-import {ChallengeContext} from '../context/ChallengeProvider';
 
 import {CHOOSE_FILE, FILE} from '../static/constants';
 import { BottomModalRef } from '../ts/interfaces';

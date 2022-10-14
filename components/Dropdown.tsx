@@ -28,7 +28,7 @@ const DropDown = () => {
   }, [value]);
 
   const addFilterValue = () => {
-    context.setContextData && context.setContextData(prevContext => {
+    context.setContextData?.(prevContext => {
       return {
         ...prevContext,
         filterBy: value,

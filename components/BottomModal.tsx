@@ -20,7 +20,7 @@ import {
 } from '../static/constants';
 import { BottomModalRef } from '../ts/interfaces';
 
-export type Props = {
+type Props = {
   forwardedRef: React.RefObject<BottomModalRef>;
 };
 

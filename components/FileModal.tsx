@@ -22,7 +22,7 @@ export const FileModal: React.FC<Props> = ({fileModalRef}) => {
   const onFilePress = (file: File) => {
     console.log(file)
     fileModalRef.current?.close();
-    context.setContextData && context.setContextData(prevContext => {
+    context.setContextData?.(prevContext => {
       return {
         ...prevContext,
         Attachments: file.Attachments,

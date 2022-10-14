@@ -16,20 +16,19 @@ import BottomModal from '../components/BottomModal';
 import Footer from '../components/Footer';
 import documentsApi from '../services/documentsApi';
 import {getSocket} from '../websocket/websocket';
-import ChallengeProvider from '../context/ChallengeProvider';
 import {ChallengeContext} from '../context/ChallengeProvider';
 import {
-  GRID,
-  LIST,
   VERSION,
   TITLE,
   VERSION_VALUE,
   TITLE_VALUE,
 } from '../static/constants';
+import { UIDesign } from '../ts/enums';
+import { Doc, Notification } from '../ts/interfaces';
 
-const Main = () => {
+const Main: React.FC = () => {
   const modalRef = useRef(null);
-  const [documents, setDocuments] = useState([]);
+  const [documents, setDocuments] = useState<Doc[]>([]);
   const [activeLayout, setActiveLayout] = useState('list');
 
   const context = useContext(ChallengeContext);
@@ -43,28 +42,28 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    if (context.contextData.documents?.length > 0) {
-      setDocuments([context.contextData.documents?.[0], ...documents]);
+    if (context.contextData && context.contextData?.Documents?.length > 0) {
+      setDocuments([context.contextData.Documents?.[0] as Doc, ...documents]);
     }
-  }, [context.contextData.documents]);
+  }, [context.contextData?.Documents]);
 
   useEffect(() => {
-    if (documents.length > 0 && context.contextData.filterBy !== null) {
-      if (context.contextData.filterBy === TITLE_VALUE) {
+    if (documents.length > 0 && context.contextData?.filterBy !== null) {
+      if (context.contextData?.filterBy === TITLE_VALUE) {
         orderDocuments(TITLE);
-      } else if (context.contextData.filterBy === VERSION_VALUE) {
+      } else if (context.contextData?.filterBy === VERSION_VALUE) {
         orderDocuments(VERSION);
       }
     }
-  }, [documents, context.contextData.filterBy]);
+  }, [documents, context.contextData?.filterBy]);
 
-  const orderDocuments = orderBy => {
-    setDocuments(
-      documents.sort((a, b) => {
-        if (a[orderBy] < b[orderBy]) {
+  const orderDocuments = (orderBy: string) => {
+  setDocuments(
+    documents.sort((a, b) => {
+        if (a[orderBy as keyof Doc] < b[orderBy as keyof Doc]) {
           return -1;
         }
-        if (a[orderBy] > b[orderBy]) {
+        if (a[orderBy as keyof Doc] > b[orderBy as keyof Doc]) {
           return 1;
         }
         return 0;
@@ -79,11 +78,11 @@ const Main = () => {
     };
   };
 
-  const addNotification = notification => {
-    context.setContextData(prevContext => {
+  const addNotification = (notification: Notification) => {
+    context.setContextData?.(prevContext => {
       return {
         ...prevContext,
-        notifications: [...prevContext?.notifications, notification],
+        Notifications: [...prevContext?.Notifications, notification],
       };
     });
   };
@@ -112,9 +111,9 @@ const Main = () => {
         </View>
         <View style={styles.scrollFooterWrapper}>
           <ScrollView contentContainerStyle={styles.scrollViewContainer}>
-            <View style={activeLayout === GRID ? styles.columns : null}>
+            <View style={activeLayout === UIDesign.GRID ? styles.columns : null}>
               {documents.map((document, index) =>
-                activeLayout === LIST ? (
+                activeLayout === UIDesign.LIST ? (
                   <CardDetail document={document} key={document?.ID} />
                 ) : (
                   <CardSmall document={document} key={document?.ID} />

@@ -1,10 +1,14 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, StyleSheet} from 'react-native';
-import {Modalize} from 'react-native-modalize';
+import {Text, TextInput, StyleSheet} from 'react-native';
 
-import Button from './Button';
+type Props = {
+  value: string;
+  onChangeText: () => void;
+  placeholder: string;
+  title: string;
+};
 
-export const Input = ({value, onChangeText, placeholder, title}) => {
+export const Input: React.FC<Props> = ({value, onChangeText, placeholder, title}) => {
   const [text, setText] = useState('');
 
   return (

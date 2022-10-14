@@ -12,9 +12,6 @@ export const FILE = 'File';
 export const FILE_TYPE = 'File type';
 export const DOCUMENTS = 'Documents';
 
-export const GRID = 'grid';
-export const LIST = 'list';
-
 export const PLACEHOLDER = 'Sort by';
 
 export const ADD_DOCUMENT = '+ Add document';

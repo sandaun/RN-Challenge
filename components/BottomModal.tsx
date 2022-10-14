@@ -21,31 +21,36 @@ import {
   SUBMIT,
   VERSION_NUMBER,
 } from '../static/constants';
+import { BottomModalRef } from '../ts/interfaces';
 
-export const BottomModal = ({forwardedRef}) => {
+export type Props = {
+  forwardedRef: React.RefObject<BottomModalRef>;
+};
+
+export const BottomModal: React.FC<Props> = ({forwardedRef}) => {
   const [name, setName] = useState('');
   const [version, setVersion] = useState('');
 
   const context = useContext(ChallengeContext);
 
-  const fileModalRef = useRef(null);
+  const fileModalRef = useRef<BottomModalRef>(null);
 
   const onSubmitButtonPress = () => {
-    context.setContextData(prevContext => {
-      return {
-        ...prevContext,
-        documents: [
-          {
-            Title: name,
-            Version: version,
-            Attachments: context.contextData.Attachments,
-            Contributors: context.contextData.Contributors,
-          },
-          ...prevContext.documents,
-        ],
-        fileChosen: null,
-      };
-    });
+      context.setContextData && context.setContextData((prevContext) => {
+
+        return {
+          ...prevContext,
+          Documents: [
+            {
+              Title: name,
+              Version: version,
+              Attachments: context.contextData?.Attachments,
+              Contributors: context.contextData?.Contributors,
+            },
+            ...prevContext.Documents,
+          ],
+        };
+      });  
     forwardedRef.current?.close();
     setName('');
     setVersion('');
@@ -53,10 +58,10 @@ export const BottomModal = ({forwardedRef}) => {
 
   const isButtonDisabled = useMemo(
     () =>
-      name && version && context.contextData.Attachments?.length > 0
+      name && version && (context.contextData && context.contextData.Attachments?.length > 0)
         ? false
         : true,
-    [name, version, context.contextData.Attachments],
+    [name, version, context.contextData && context.contextData.Attachments],
   );
 
   return (

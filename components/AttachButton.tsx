@@ -5,13 +5,15 @@ import {document} from '../static/images';
 import {ChallengeContext} from '../context/ChallengeProvider';
 
 import {CHOOSE_FILE, FILE} from '../static/constants';
+import { BottomModalRef } from '../ts/interfaces';
 
-const AttachButton = ({fileModalRef}) => {
-  const [layout, setLayout] = useState('list');
-  const context = useContext(ChallengeContext);
+export type Props = {
+  fileModalRef: React.RefObject<BottomModalRef>;
+};
 
+const AttachButton: React.FC<Props> = ({fileModalRef}) => {
   const handleAttachList = () => {
-    fileModalRef.current.open();
+    fileModalRef.current?.open();
   };
 
   return (

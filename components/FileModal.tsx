@@ -16,6 +16,7 @@ import { BottomModalRef, File } from '../ts/interfaces';
 type Props = {
   fileModalRef: React.RefObject<BottomModalRef>;
 };
+
 export const FileModal: React.FC<Props> = ({fileModalRef}) => {
   const context = useContext(ChallengeContext);
 

@@ -39,4 +39,5 @@ export interface ContextData {
   Documents: Partial<Doc>[],
   Attachments: string[];
   Contributors: Contributor[];
+  filterBy: string;
 }

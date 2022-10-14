@@ -15,7 +15,8 @@ const ChallengeProvider: React.FC<Props> = props => {
       Notifications: [],
       Documents: [],
       Attachments: [],
-      Contributors: []
+      Contributors: [],
+      filterBy: ''
     };
   });
 

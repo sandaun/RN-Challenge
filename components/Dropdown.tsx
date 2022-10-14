@@ -13,7 +13,7 @@ import {
 
 const DropDown = () => {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState('');
   const [items, setItems] = useState([
     {label: TITLE, value: TITLE_VALUE},
     {label: VERSION, value: VERSION_VALUE},

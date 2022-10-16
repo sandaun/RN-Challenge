@@ -9,10 +9,15 @@ const documentsApi = () => {
     },
   });
 
-  const getInfo = async (): Promise<Doc[]> => {
-    const response = await docs.get(`/documents`);
+  const getInfo = async (): Promise<Doc[] | undefined> => {
+    try {
+      const response = await docs.get<Doc[]>(`/documents`);
+  
+      return response.data;
 
-    return response.data;
+    } catch (error) {
+      console.warn('Get Documents Error:', error)
+    }
   };
 
   return {getInfo};

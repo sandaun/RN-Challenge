@@ -21,7 +21,6 @@ export const FileModal: React.FC<Props> = ({fileModalRef}) => {
   const context = useContext(ChallengeContext);
 
   const onFilePress = (file: File) => {
-    console.log(file)
     fileModalRef.current?.close();
     context.setContextData?.(prevContext => {
       return {

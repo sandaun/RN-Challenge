@@ -93,7 +93,7 @@ const Main: React.FC = () => {
     try {
       const data = await api.getInfo();
 
-      setDocuments(data);
+      data && setDocuments(data);
     } catch (error) {
       console.warn(error);
     }

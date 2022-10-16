@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Doc } from '../ts/interfaces';
 
 const documentsApi = () => {
   const docs = axios.create({
@@ -8,7 +9,7 @@ const documentsApi = () => {
     },
   });
 
-  const getInfo = async () => {
+  const getInfo = async (): Promise<Doc[]> => {
     const response = await docs.get(`/documents`);
 
     return response.data;
